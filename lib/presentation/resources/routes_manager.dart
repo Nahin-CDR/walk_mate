@@ -1,11 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tracker/presentation/completed_walk/completed_walk_view.dart';
+import 'package:tracker/presentation/main/main_view.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
+import 'package:tracker/presentation/set_limit/set_limit_view.dart';
 import 'package:tracker/presentation/splash/splash.dart';
 
 class Routes{
   static const String splashRoute = "/";
-  static const String homeRoute = "/home";
+  static const String mainRoute = "/main";
+  static const String completeRoute = "/completed";
+  static const String setLimit = "/setLimit";
 }
 
 class RoutesGenerator{
@@ -13,6 +17,15 @@ class RoutesGenerator{
     switch(routeSettings.name){
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (BuildContext context)=>const SplashView());
+      case Routes.mainRoute:
+        final arguments = routeSettings.arguments as LimitArgument;
+        return MaterialPageRoute(builder: (BuildContext context)=> MainView(
+          limit: arguments.limit,
+        ));
+      case Routes.completeRoute:
+        return MaterialPageRoute(builder: (BuildContext context)=> const CompletedView());
+      case Routes.setLimit:
+        return MaterialPageRoute(builder: (BuildContext context)=> const SetLimitView());
       default:
         return MaterialPageRoute(builder: (BuildContext context){
           return const Scaffold(

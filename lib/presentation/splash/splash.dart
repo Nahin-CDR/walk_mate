@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
+import 'package:tracker/presentation/set_limit/set_limit_view.dart';
 import '../resources/routes_manager.dart';
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
     });
   }
   _goNext(){
-    Navigator.pushReplacementNamed(context, Routes.homeRoute);
+    Navigator.pushReplacementNamed(context, Routes.setLimit);
   }
   @override
   void initState() {
