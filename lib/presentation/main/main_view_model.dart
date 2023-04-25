@@ -23,6 +23,7 @@ class MainViewModel with ChangeNotifier{
 
   void startCountDown({required int second,required BuildContext context}) {
     sec = second;
+    getCurrentPosition();
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (sec >= 0) {
         hours = sec / 3600.round();
@@ -36,9 +37,10 @@ class MainViewModel with ChangeNotifier{
         sec--;
         notifyListeners();
       } else {
+        getCurrentPosition();
         timer.cancel();
         Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacementNamed(context, Routes.completeRoute);
+          Navigator.pushReplacementNamed(context, Routes.completeRoute,arguments:CompletedArguments(distance: distance));
         });
       }
     });
@@ -62,4 +64,9 @@ class MainViewModel with ChangeNotifier{
       notifyListeners();
     }
   }
+}
+
+class CompletedArguments{
+ double distance;
+ CompletedArguments({required this.distance});
 }

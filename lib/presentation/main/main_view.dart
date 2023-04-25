@@ -16,72 +16,12 @@ class MainView extends StatefulWidget {
   // ignore: no_logic_in_create_state
   State<MainView> createState() => _MainViewState(walkLimit: limit);
 }
-double startLat = 0.0;
-double startLong = 0.0;
-double endLat = 0.0;
-double endLong = 0.0;
-bool countDown = false;
-double distance = 0.0;
-bool firstHit = false;
 List checkPoints = [];
-int checkPointCounter = 1;
 class _MainViewState extends State<MainView> {
   final int walkLimit;
   MainViewModel mainViewModel = MainViewModel();
   _MainViewState({required this.walkLimit});
-  int finalWalkLimit = -1;
-  void getCurrentPosition()async{
-    LocationPermission permission = await Geolocator.checkPermission();
-    if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
-      LocationPermission asked = await Geolocator.requestPermission();
-    }else{
-      Position currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best
-      );
-      if(firstHit) {
-        setState(() {
-          startLat = currentPosition.latitude;
-          startLong = currentPosition.longitude;
-          firstHit = false;
-        });
-      }
-      // } else{
-      //   setState(() {
-      //     endLat = currentPosition.latitude;
-      //     endLong = currentPosition.longitude;
-      //   });
-      // }
-       setState(() {
 
-       distance = Geolocator.distanceBetween(startLat, startLong, currentPosition.latitude, currentPosition.longitude);
-       // _streamController.sink.add(distance);
-      });
-    }
-  }
-  // void startTimer(){
-  //   Timer.periodic(const Duration(seconds: 1), (timer) {
-  //     if (finalWalkLimit>=0) {
-  //      setState(() {
-  //        finalWalkLimit--;
-  //      });
-  //     }else{
-  //       getCurrentPosition();
-  //       timer.cancel();
-  //       UtilsManager.toastMessage(message: AppString.goalCompletionToast);
-  //       _startDelay();
-  //     }
-  //   });
-  // }
-  // Timer? _timer;
-  // _startDelay(){
-  //   _timer = Timer(const Duration(seconds: 2), () {
-  //   _goNext();
-  //   });
-  // }
-
-  // _goNext(){
-  //   Navigator.pushReplacementNamed(context, Routes.completeRoute);
-  // }
   @override
   void initState() {
     // TODO: implement initState
@@ -92,13 +32,6 @@ class _MainViewState extends State<MainView> {
       //finalWalkLimit = walkLimit*60;
     });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    //_timer?.cancel();
-    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -128,11 +61,11 @@ class _MainViewState extends State<MainView> {
                                ),
                              ),
                              Container(
-                                 margin: const EdgeInsets.all(10),
-                                 child:  Text("Tracking now : ${mainViewModel.distance.toDouble().toStringAsFixed(2)} m",
-                                     style: const TextStyle(
+                                 margin: const EdgeInsets.all(10), //${mainViewModel.distance.toDouble().toStringAsFixed(2)} m
+                                 child:  const Text("Tracking now : ",
+                                     style: TextStyle(
                                          color: Colors.black,
-                                         fontSize: 20,
+                                         fontSize: 25,
                                          fontWeight: FontWeight.bold
                                      )
                                  )

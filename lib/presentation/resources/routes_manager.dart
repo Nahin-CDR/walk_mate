@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/completed_walk/completed_walk_view.dart';
 import 'package:tracker/presentation/main/main_view.dart';
+import 'package:tracker/presentation/main/main_view_model.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
 import 'package:tracker/presentation/set_limit/set_limit_view.dart';
 import 'package:tracker/presentation/splash/splash.dart';
@@ -23,7 +24,11 @@ class RoutesGenerator{
           limit: arguments.limit,
         ));
       case Routes.completeRoute:
-        return MaterialPageRoute(builder: (BuildContext context)=> const CompletedView());
+        final arguments = routeSettings.arguments as CompletedArguments;
+        String distance = arguments.distance.toDouble().toStringAsFixed(2);
+        return MaterialPageRoute(builder: (BuildContext context)=> CompletedView(
+          totalDistance: distance,
+        ));
       case Routes.setLimit:
         return MaterialPageRoute(builder: (BuildContext context)=> const SetLimitView());
       default:
