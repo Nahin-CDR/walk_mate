@@ -39,7 +39,7 @@ class MainViewModel with ChangeNotifier{
       } else {
         getCurrentPosition();
         timer.cancel();
-        Timer(const Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), (){
           Navigator.pushReplacementNamed(context, Routes.completeRoute,arguments:CompletedArguments(distance: distance));
         });
       }

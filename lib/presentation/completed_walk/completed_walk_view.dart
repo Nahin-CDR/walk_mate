@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
 import '../resources/routes_manager.dart';
-
 class CompletedView extends StatefulWidget {
   final String totalDistance;
   const CompletedView({
@@ -15,10 +14,8 @@ class CompletedView extends StatefulWidget {
 }
 
 class _CompletedViewState extends State<CompletedView> {
-
   final String travelledDistance;
   _CompletedViewState({required this.travelledDistance});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,12 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:tracker/main.dart';
 import 'package:tracker/presentation/main/main_view_model.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
-import '../resources/routes_manager.dart';
-import '../resources/utils_manager.dart';
+import '../../service/local_notification_service.dart';
+import 'package:timezone/data/latest.dart' as tz;
 class MainView extends StatefulWidget {
   final int limit;
   const MainView({
@@ -29,8 +26,9 @@ class _MainViewState extends State<MainView> {
     mainViewModel.getCurrentPosition();
     setState((){
       checkPoints.clear();
-      //finalWalkLimit = walkLimit*60;
     });
+    tz.initializeTimeZones();
+    LocalNotificationService().showNotification(1,AppString.notificationTitle,AppString.notificationMessage,walkLimit*60);
     super.initState();
   }
   @override
@@ -39,7 +37,6 @@ class _MainViewState extends State<MainView> {
         child: Scaffold(
             backgroundColor: Colors.white,
             body: Column(
-              //mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
@@ -82,7 +79,6 @@ class _MainViewState extends State<MainView> {
                         itemCount: checkPoints.length,
                         itemBuilder:(context,index){
                           return Container(
-                            //padding: EdgeInsets.only(left: 20,right: 20),
                             margin: const EdgeInsets.only(left: 20,right: 20),
                             height: 50,
                             child: Column(
@@ -96,7 +92,7 @@ class _MainViewState extends State<MainView> {
                                           color: Colors.grey
                                       )
                                     ),
-                                    Text(" ${checkPoints[index]} ",
+                                    Text(" ${checkPoints[index]} m",
                                       style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.grey,
