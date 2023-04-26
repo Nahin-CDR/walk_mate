@@ -1,6 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
+import '../../service/notification_service.dart';
 import '../resources/routes_manager.dart';
 class CompletedView extends StatefulWidget {
   final String totalDistance;

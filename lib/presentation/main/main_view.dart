@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracker/presentation/main/main_view_model.dart';
-import 'package:tracker/presentation/resources/string_manager.dart';
-import '../../service/local_notification_service.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:tracker/presentation/main/widgets.dart';
 class MainView extends StatefulWidget {
   final int limit;
-  const MainView({
-    required this.limit,
-    Key? key}) : super(key: key);
+  const MainView({required this.limit,Key? key}) : super(key: key);
   @override
   // ignore: no_logic_in_create_state
   State<MainView> createState() => _MainViewState(walkLimit: limit);
@@ -20,15 +16,14 @@ class _MainViewState extends State<MainView> {
   _MainViewState({required this.walkLimit});
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     mainViewModel.startCountDown(second:walkLimit*60,context:context);
     mainViewModel.getCurrentPosition();
+    mainViewModel.setNotification(walkLimit: walkLimit);
     setState((){
       checkPoints.clear();
     });
-    tz.initializeTimeZones();
-    LocalNotificationService().showNotification(1,AppString.notificationTitle,AppString.notificationMessage,walkLimit*60);
     super.initState();
   }
   @override
@@ -58,15 +53,10 @@ class _MainViewState extends State<MainView> {
                                ),
                              ),
                              Container(
-                                 margin: const EdgeInsets.all(10), //${mainViewModel.distance.toDouble().toStringAsFixed(2)} m
-                                 child:  const Text("Tracking now : ",
-                                     style: TextStyle(
-                                         color: Colors.black,
-                                         fontSize: 25,
-                                         fontWeight: FontWeight.bold
-                                     )
-                                 )
-                             ),
+                               margin: const EdgeInsets.all(10),
+                               height: 30,
+                               child: animText(txt: "Tracking now : "),
+                             )
                            ],
                          ),
                        );

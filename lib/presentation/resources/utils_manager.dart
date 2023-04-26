@@ -43,6 +43,7 @@ class UtilsManager {
         textColor: Colors.white,
         gravity: ToastGravity.BOTTOM,
         fontSize: 15,
-        toastLength: Toast.LENGTH_LONG);
+        toastLength: Toast.LENGTH_LONG
+    );
   }
 }

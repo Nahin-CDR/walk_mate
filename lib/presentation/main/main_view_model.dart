@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../service/notification_service.dart';
 import '../resources/routes_manager.dart';
 
 class MainViewModel with ChangeNotifier{
@@ -63,6 +64,15 @@ class MainViewModel with ChangeNotifier{
       distance = Geolocator.distanceBetween(startLat, startLong, currentPosition.latitude, currentPosition.longitude);
       notifyListeners();
     }
+  }
+
+  void setNotification({required int walkLimit})async{
+    await NotificationService.showNotification(
+        title: "WalkMate notification",
+        body: "You have completed the targeted walking time",
+        interval: walkLimit*60,
+        scheduled: true
+    );
   }
 }
 
