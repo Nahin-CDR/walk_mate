@@ -1,14 +1,10 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
-import '../../service/notification_service.dart';
 import '../resources/routes_manager.dart';
 class CompletedView extends StatefulWidget {
   final String totalDistance;
-  const CompletedView({
-    required this.totalDistance,
-    Key? key}) : super(key: key);
+  const CompletedView({required this.totalDistance,Key? key}) : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
@@ -37,10 +33,14 @@ class _CompletedViewState extends State<CompletedView> {
             ),
             Container(
               margin:const EdgeInsets.only(left: 20,bottom: 20),
-              child: Text("Total Travelled distance : $travelledDistance m"),
+              child: Text("${AppString.travelledDistance}: $travelledDistance m"),
             ),
             Center(
-              child: Image.asset(ImageAssets.completedImage,height: 150,width: 150,),
+              child: Image.asset(
+                  ImageAssets.completedImage,
+                  height: 150,
+                  width: 150
+              ),
             ),
             const SizedBox(height: 50),
             Container(
@@ -58,7 +58,7 @@ class _CompletedViewState extends State<CompletedView> {
                       Navigator.pushReplacementNamed(context, Routes.setLimit);
                     },
                     child: const Center(
-                        child: Text("Go back",
+                        child: Text(AppString.goBack,
                           style: TextStyle(
                               fontWeight: FontWeight.bold
                           ),
