@@ -1,4 +1,4 @@
-package com.example.tracker;
+package com.nahincdr.walkmate;
 
 import io.flutter.embedding.android.FlutterActivity;
 
