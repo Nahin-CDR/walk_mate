@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/utils_manager.dart';
 import 'package:tracker/presentation/set_limit/widgets.dart';
+import '../resources/color_manager.dart';
 import '../resources/routes_manager.dart';
 import '../resources/string_manager.dart';
 
@@ -39,36 +41,51 @@ class _SetLimitViewState extends State<SetLimitView> {
     return  Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              AppString.setLimitTitle,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30
-              ),
-            ),
             Container(
-              margin: const EdgeInsets.all(20.0),
-              child:  takeInput(
-                  mxLen: 2,
-                  myHint: AppString.inputFieldHint,
-                  myLabelText: AppString.labelText,
-                  inputTextController: inputLimit,
-                  isPassWord: false
-              ),
+              margin: const EdgeInsets.all(20),
+              child: Image.asset(ImageAssets.walkMate),
+            ),
+            Expanded(
+                child:  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      AppString.setLimitTitle,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: ColorManager.appPrimaryColor
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20.0),
+                      child:  takeInput(
+                          mxLen: 2,
+                          myHint: AppString.inputFieldHint,
+                          myLabelText: AppString.labelText,
+                          inputTextController: inputLimit,
+                          isPassWord: false
+                      ),
+                    )
+                  ],
+                )
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorManager.appPrimaryColor,
         onPressed: (){
           if(inputLimit.text.isNotEmpty && int.parse(inputLimit.text)<=10){
             setState(() {
               takenLimit = int.parse(inputLimit.text);
             });
-            Navigator.pushNamed(context, Routes.mainRoute,arguments: LimitArgument(limit: takenLimit));
+            // we will pass this time limit to show counter to next screen as argument
+            Navigator.pushNamed(context, Routes.homeRoute,arguments: LimitArgument(limit: takenLimit));
           }else{
             UtilsManager.toastMessage(message: AppString.inputToastWarning);
           }

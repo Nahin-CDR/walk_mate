@@ -12,6 +12,7 @@ Widget takeInput({
     controller: inputTextController,
     obscureText: isPassWord,
     decoration: InputDecoration(
+        labelStyle:const TextStyle(color: Colors.grey, fontSize: 14),
         labelText: myLabelText.toString(),
         hintText: myHint.toString(),
         hintStyle: const TextStyle(color: Color(0xFFACACAC), fontSize: 14),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/completed_walk/completed_walk_view.dart';
-import 'package:tracker/presentation/main/main_view.dart';
-import 'package:tracker/presentation/main/main_view_model.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
 import 'package:tracker/presentation/set_limit/set_limit_view.dart';
 import 'package:tracker/presentation/splash/splash.dart';
+import '../home/home_view.dart';
+import '../home/home_view_model.dart';
+import '../welcome/welcome_view.dart';
 
 class Routes{
   static const String splashRoute = "/";
-  static const String mainRoute = "/main";
+  static const String welcome = "/welcome";
+  static const String homeRoute = "/home";
   static const String completeRoute = "/completed";
   static const String setLimit = "/setLimit";
 }
@@ -18,9 +20,11 @@ class RoutesGenerator{
     switch(routeSettings.name){
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (BuildContext context)=>const SplashView());
-      case Routes.mainRoute:
+      case Routes.welcome:
+        return MaterialPageRoute(builder: (BuildContext context)=>const WelcomeView());
+      case Routes.homeRoute:
         final arguments = routeSettings.arguments as LimitArgument;
-        return MaterialPageRoute(builder: (BuildContext context)=> MainView(
+        return MaterialPageRoute(builder: (BuildContext context)=> HomeView(
           limit: arguments.limit,
         ));
       case Routes.completeRoute:

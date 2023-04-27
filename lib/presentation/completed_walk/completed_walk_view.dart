@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tracker/presentation/completed_walk/widgets.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
+import 'package:tracker/presentation/resources/color_manager.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
 import '../resources/routes_manager.dart';
 class CompletedView extends StatefulWidget {
@@ -25,7 +27,6 @@ class _CompletedViewState extends State<CompletedView> {
               child: const Text(
                   AppString.goalCompletion,
                   style: TextStyle(
-                      color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold
                   )
@@ -37,36 +38,24 @@ class _CompletedViewState extends State<CompletedView> {
             ),
             Center(
               child: Image.asset(
-                  ImageAssets.completedImage,
+                  ImageAssets.congrats,
                   height: 150,
                   width: 150
               ),
             ),
-            const SizedBox(height: 50),
             Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),  // radius of 10
-                  color: Colors.green.withOpacity(.5)  // green as background color
-              ),
               margin: const EdgeInsets.all(20),
-              child: Card(
-                child: SizedBox(
-                  height: 30,
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.pop(context);
-                      Navigator.pushReplacementNamed(context, Routes.setLimit);
-                    },
-                    child: const Center(
-                        child: Text(AppString.goBack,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold
-                          ),
-                        )
-                    ),
-                  ),
-                ),
+              child: const Text("Congratulations on reaching your Target",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: ColorManager.appPrimaryColor
+                )
               ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(15),
+              child: navToSetLimitButton(context:context,routeName: Routes.setLimit),
             )
           ],
         ),

@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
-import 'package:tracker/presentation/set_limit/set_limit_view.dart';
 import '../resources/routes_manager.dart';
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
   @override
   State<SplashView> createState() => _SplashViewState();
 }
+
+/*
+Plan :
+At first this screen will be opened then
+after 2 seconds we will go to Welcome screen
+ */
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
@@ -17,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
     });
   }
   _goNext(){
-    Navigator.pushReplacementNamed(context, Routes.setLimit);
+    Navigator.pushReplacementNamed(context, Routes.welcome);
   }
   @override
   void initState() {

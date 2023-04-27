@@ -4,7 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../service/notification_service.dart';
 import '../resources/routes_manager.dart';
 
-class MainViewModel with ChangeNotifier{
+class HomeViewModel with ChangeNotifier{
   int h = 0;
   int m = 0;
   int s = 0;

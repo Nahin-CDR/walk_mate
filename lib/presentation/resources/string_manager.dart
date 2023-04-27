@@ -10,4 +10,5 @@ class AppString{
   static const String labelText = "walking time limit";
   static const String inputToastWarning = "input time between 1-10 minutes";
   static const String setLimitTitle = "Set A time limit";
+  static const String walkingGoal = "Set Your Walking Goal Today";
 }
