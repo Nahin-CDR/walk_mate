@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/utils_manager.dart';
 import 'package:tracker/presentation/set_limit/widgets.dart';
+import '../../service/notification_service.dart';
 import '../resources/color_manager.dart';
 import '../resources/routes_manager.dart';
 import '../resources/string_manager.dart';
@@ -19,21 +20,14 @@ class _SetLimitViewState extends State<SetLimitView> {
 
   TextEditingController inputLimit = TextEditingController();
   int takenLimit = 0;
-  void askedForLocationPermission()async{
-    LocationPermission permission = await Geolocator.checkPermission();
-    if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
-      LocationPermission asked = await Geolocator.requestPermission();
-    }else{
-      Position currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.best
-      );
-    }
+  Future getNotificationPermission()async{
+    await NotificationService.initializeNotification();
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    askedForLocationPermission();
+    getNotificationPermission();
     super.initState();
   }
   @override

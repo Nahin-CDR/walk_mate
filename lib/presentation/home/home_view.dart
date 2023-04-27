@@ -44,20 +44,31 @@ class _HomeViewState extends State<HomeView> {
                     child: Consumer<HomeViewModel>(
                       builder: (context,provider,child){
                         return SizedBox(
-                          height: 210,
+                          height: 100,
                           child: Column(
                             children: [
-                              Text(
-                                'Time remaining ${mainViewModel.m} : ${mainViewModel.s}',
-                                style: const TextStyle(
-                                    fontSize: 15,
-                                    color: ColorManager.appPrimaryColor
+                              Container(
+                                height: 20,
+                                child: Text(
+                                  'Time remaining ${mainViewModel.m} : ${mainViewModel.s}',
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      color: ColorManager.appPrimaryColor
+                                  ),
                                 ),
                               ),
                               SizedBox(
                                 height: 60,
-                                child: animText(txt: "Tracking now : "),
-                              )
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.location_on,size: 15,),
+                                    animText(txt: "Tracking now : ")
+                                  ],
+                                ),
+                              ),
+                              const Text("Your check points "),
                             ],
                           ),
                         );
@@ -102,7 +113,8 @@ class _HomeViewState extends State<HomeView> {
                         );
                       }
                   )
-              )
+              ),
+              const SizedBox(height: 80)
             ],
           ),
         ),

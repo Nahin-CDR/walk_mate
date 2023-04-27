@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:tracker/presentation/resources/assets_manager.dart';
 import 'package:tracker/presentation/resources/string_manager.dart';
@@ -15,6 +16,18 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
+  Future askedForLocationPermission()async{
+    LocationPermission permission = await Geolocator.checkPermission();
+    if(permission == LocationPermission.denied || permission == LocationPermission.deniedForever){
+      LocationPermission asked = await Geolocator.requestPermission();
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    askedForLocationPermission();
+    super.initState();
+  }
   bool light = false;
   @override
   Widget build(BuildContext context) {

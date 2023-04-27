@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import '../resources/color_manager.dart';
 Widget animText ({required txt})=>SizedBox(
   child: Container(
-    height: 50,
+    height: 20,
     margin: const EdgeInsets.all(5.0),
     child:  DefaultTextStyle(
       style: const TextStyle(
         color: Colors.grey,
-        fontSize: 20,
+        fontSize: 15,
       ),
       child: AnimatedTextKit(
         repeatForever: true,
