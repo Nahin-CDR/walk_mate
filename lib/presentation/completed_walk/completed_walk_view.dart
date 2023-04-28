@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tracker/presentation/completed_walk/widgets.dart';
-import 'package:tracker/presentation/resources/assets_manager.dart';
-import 'package:tracker/presentation/resources/color_manager.dart';
-import 'package:tracker/presentation/resources/string_manager.dart';
+import 'package:walkmate/presentation/completed_walk/widgets.dart';
+import 'package:walkmate/presentation/resources/assets_manager.dart';
+import 'package:walkmate/presentation/resources/color_manager.dart';
+import 'package:walkmate/presentation/resources/string_manager.dart';
 import '../resources/routes_manager.dart';
+
 class CompletedView extends StatefulWidget {
   final String totalDistance;
-  const CompletedView({required this.totalDistance,Key? key}) : super(key: key);
+  const CompletedView({required this.totalDistance, Key? key})
+      : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
-  State<CompletedView> createState() => _CompletedViewState(travelledDistance: totalDistance);
+  State<CompletedView> createState() =>
+      _CompletedViewState(travelledDistance: totalDistance);
 }
 
 class _CompletedViewState extends State<CompletedView> {
@@ -24,38 +27,29 @@ class _CompletedViewState extends State<CompletedView> {
           children: [
             Container(
               margin: const EdgeInsets.all(20.0),
-              child: const Text(
-                  AppString.goalCompletion,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                  )
-              ),
+              child: const Text(AppString.goalCompletion,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             Container(
-              margin:const EdgeInsets.only(left: 20,bottom: 20),
-              child: Text("${AppString.travelledDistance}: $travelledDistance m"),
+              margin: const EdgeInsets.only(left: 20, bottom: 20),
+              child:
+                  Text("${AppString.travelledDistance}: $travelledDistance m"),
             ),
             Center(
-              child: Image.asset(
-                  ImageAssets.congrats,
-                  height: 150,
-                  width: 150
-              ),
+              child: Image.asset(ImageAssets.congrats, height: 150, width: 150),
             ),
             Container(
               margin: const EdgeInsets.all(20),
               child: const Text("Congratulations on reaching your Target",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: ColorManager.appPrimaryColor
-                )
-              ),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: ColorManager.appPrimaryColor)),
             ),
             Container(
               margin: const EdgeInsets.all(15),
-              child: navToSetLimitButton(context:context,routeName: Routes.setLimit),
+              child: navToSetLimitButton(
+                  context: context, routeName: Routes.setLimit),
             )
           ],
         ),

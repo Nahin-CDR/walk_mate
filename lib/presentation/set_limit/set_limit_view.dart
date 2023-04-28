@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tracker/presentation/resources/assets_manager.dart';
-import 'package:tracker/presentation/resources/utils_manager.dart';
-import 'package:tracker/presentation/set_limit/widgets.dart';
+import 'package:walkmate/presentation/resources/assets_manager.dart';
+import 'package:walkmate/presentation/resources/utils_manager.dart';
+import 'package:walkmate/presentation/set_limit/widgets.dart';
 import '../../service/notification_service.dart';
 import '../resources/color_manager.dart';
 import '../resources/routes_manager.dart';
 import '../resources/string_manager.dart';
-
 
 class SetLimitView extends StatefulWidget {
   const SetLimitView({Key? key}) : super(key: key);
@@ -17,10 +16,9 @@ class SetLimitView extends StatefulWidget {
 }
 
 class _SetLimitViewState extends State<SetLimitView> {
-
   TextEditingController inputLimit = TextEditingController();
   int takenLimit = 0;
-  Future getNotificationPermission()async{
+  Future getNotificationPermission() async {
     await NotificationService.initializeNotification();
   }
 
@@ -30,9 +28,10 @@ class _SetLimitViewState extends State<SetLimitView> {
     getNotificationPermission();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,44 +42,42 @@ class _SetLimitViewState extends State<SetLimitView> {
               child: Image.asset(ImageAssets.walkMate),
             ),
             Expanded(
-                child:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      AppString.setLimitTitle,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: ColorManager.appPrimaryColor
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(20.0),
-                      child:  takeInput(
-                          mxLen: 2,
-                          myHint: AppString.inputFieldHint,
-                          myLabelText: AppString.labelText,
-                          inputTextController: inputLimit,
-                          isPassWord: false
-                      ),
-                    )
-                  ],
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  AppString.setLimitTitle,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: ColorManager.appPrimaryColor),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(20.0),
+                  child: takeInput(
+                      mxLen: 2,
+                      myHint: AppString.inputFieldHint,
+                      myLabelText: AppString.labelText,
+                      inputTextController: inputLimit,
+                      isPassWord: false),
                 )
-            )
+              ],
+            ))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.appPrimaryColor,
-        onPressed: (){
-          if(inputLimit.text.isNotEmpty && int.parse(inputLimit.text)<=10){
+        onPressed: () {
+          if (inputLimit.text.isNotEmpty && int.parse(inputLimit.text) <= 10) {
             setState(() {
               takenLimit = int.parse(inputLimit.text);
             });
             // we will pass this time limit to show counter to next screen as argument
-            Navigator.pushNamed(context, Routes.homeRoute,arguments: LimitArgument(limit: takenLimit));
-          }else{
+            Navigator.pushNamed(context, Routes.homeRoute,
+                arguments: LimitArgument(limit: takenLimit));
+          } else {
             UtilsManager.toastMessage(message: AppString.inputToastWarning);
           }
         },
@@ -90,7 +87,7 @@ class _SetLimitViewState extends State<SetLimitView> {
   }
 }
 
-class LimitArgument{
+class LimitArgument {
   final int limit;
   LimitArgument({required this.limit});
 }

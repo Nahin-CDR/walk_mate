@@ -7,9 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tracker/app/app.dart';
-
-import 'package:tracker/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -29,3 +26,5 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+
+//keytool -genkey -v -keystore C:\Users\USER\Downloads\JPG\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 90000 -alias upload

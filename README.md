@@ -1,4 +1,4 @@
-# tracker
+# walkmate
 
 A new Flutter project.
 
